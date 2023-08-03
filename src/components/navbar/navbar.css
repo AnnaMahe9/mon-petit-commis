@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #B91818;
+  }
+  
+  #user-photo {
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+  }
+  

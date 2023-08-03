@@ -1,0 +1,29 @@
+
+.searchbar-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 5px 5px 20px lightgray;
+    margin: 30px 20px;
+    width: -webkit-fill-available;
+}
+
+.search-input {
+    border: none;
+    width: 100%;
+    font-size: 20px;
+}
+
+@media screen and (max-width:500px) {
+
+    .searchbar-container {
+        padding: 10px;
+    }
+
+    .search-input {
+        font-size: 12px;
+    }
+}

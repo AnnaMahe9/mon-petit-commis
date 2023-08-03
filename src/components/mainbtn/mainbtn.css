@@ -1,0 +1,23 @@
+.main-btn {
+    padding: 15px 25px;
+    font-size: 20px;
+    color: white;
+    background-color: #B91818;
+    border-radius: 10px;
+    border: none;
+    margin: 25px;
+    width: 250px;
+    box-shadow: 5px 5px 20px lightgray;
+    cursor: pointer;
+    transition: 0.6s ease-in-out;
+}
+
+.main-btn:hover {
+    transform: scale(1.15);
+}
+
+@media screen and (max-width:500px) {
+    .main-btn {
+        font-size: 15px;
+    }
+}
