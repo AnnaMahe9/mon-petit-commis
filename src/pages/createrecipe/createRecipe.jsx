@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddForm from "../../components/addform/AddForm";
+import AddForm from "../../components/recipeform/RecipeForm";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateRecipe() {
