@@ -2,12 +2,15 @@ import { faLink, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import './recipe.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 export default function Recipe() {
     // State
-    const recipeId = useParams().id
-    const [recipe, setRecipe] = useState([])
+    const recipeId = useParams().id;
+    const [recipe, setRecipe] = useState([]);
+    const [recipes, setRecipes] = useState([]);
+    const navigate = useNavigate();
 
     // Behavior
 
@@ -25,19 +28,39 @@ export default function Recipe() {
         );
     }, [])
 
-    // RENDER
+    // DELETE method
+    const handleDelete = () => {
+        fetch(`http://localhost:5000/recipes/${recipeId}`, {method: 'DELETE'})
+            .then((res) => res.json())
+            .then(
+            () => {
+                // Met à jour la liste des tâches après la suppression réussie
+                const recipesCopyUpdated = recipes.filter((recipe) => recipe._id !== recipeId)
+                setRecipes(recipesCopyUpdated)
+                navigate('/recipes')
+            },
+            (error) => {
+                console.error('Erreur lors de la suppression des données', error);
+            }
+        );
+    }
+
+    // Render
+    
     return(
         <div className="general-container">
             <div className="recipe-container">
                 <div className="recipe-title-container">
-                    <FontAwesomeIcon className='icon' icon={faPen} />
+                    <HashLink to={`/recipes/${recipe._id}/update_recipe`}>
+                        <FontAwesomeIcon className='icon' icon={faPen} />
+                    </HashLink>
                     <div className="title-infos">
                         <h1>{recipe.title}</h1>
                         {
                             !recipe.category ? <h3>- Non catégorisé -</h3> : <h3>- {recipe.category} -</h3> 
                         }
                     </div>
-                    <FontAwesomeIcon className='icon' icon={faTrash} />
+                    <FontAwesomeIcon className='icon' icon={faTrash} onClick={handleDelete} />
                 </div>
 
                 <img className='big-recipe-photo' src="/images/recipe1.jpg" alt="recipe1" />

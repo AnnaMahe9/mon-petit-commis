@@ -32,7 +32,7 @@ export default function AllRecipes() {
                 <h1>Toutes mes recettes</h1>
                 {<SearchBar/>}
                 <div className="recipes">
-                    <HashLink to='/recette'>
+                    <HashLink to='/recipe'>
                         <div className="recipe">
                             <img className="recipe-photo" src="/images/recipe1.jpg" alt="recipePhoto" />
                             <div className="recipe-infos">
