@@ -16,7 +16,7 @@ export default function Recipe() {
 
     // GET method
     useEffect(()=> {
-        fetch(`http://localhost:5000/recipes/${recipeId}`)
+        fetch(`http://localhost:3030/recipe/${recipeId}`)
         .then (response => response.json())
         .then (
             (data) => {
@@ -30,12 +30,12 @@ export default function Recipe() {
 
     // DELETE method
     const handleDelete = () => {
-        fetch(`http://localhost:5000/recipes/${recipeId}`, {method: 'DELETE'})
+        fetch(`http://localhost:3030/recipe/${recipeId}`, {method: 'DELETE'})
             .then((res) => res.json())
             .then(
             () => {
                 // Met à jour la liste des tâches après la suppression réussie
-                const recipesCopyUpdated = recipes.filter((recipe) => recipe._id !== recipeId)
+                const recipesCopyUpdated = recipes.filter((recipe) => recipe.id !== recipeId)
                 setRecipes(recipesCopyUpdated)
                 navigate('/recipes')
             },
@@ -51,7 +51,7 @@ export default function Recipe() {
         <div className="general-container">
             <div className="recipe-container">
                 <div className="recipe-title-container">
-                    <HashLink to={`/recipes/${recipe._id}/update_recipe`}>
+                    <HashLink to={`/recipes/${recipe.id}/update_recipe`}>
                         <FontAwesomeIcon className='icon' icon={faPen} />
                     </HashLink>
                     <div className="title-infos">

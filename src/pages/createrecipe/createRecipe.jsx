@@ -29,13 +29,13 @@ export default function CreateRecipe() {
       body: JSON.stringify(newRecipe)
     }
 
-    fetch('http://localhost:5000/recipes', requestOptions)
+    fetch('http://localhost:3030/recipe', requestOptions)
       .then(response => response.json())
       .then(data => {
         const recipesCopy = [...recipes]
         recipesCopy.push(data)
         setRecipes(recipesCopy)
-        navigate(`/recipes/${data._id}`)
+        navigate(`/recipes/${data.id}`)
       },
       (error) => {
         console.error("Une erreur s'est produite lors de l'enregistrement de la recette", error)

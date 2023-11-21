@@ -13,11 +13,11 @@ export default function AllRecipes() {
 
     // GET Method
     useEffect(() => {
-        fetch(`http://localhost:5000/recipes`)
+        fetch(`http://localhost:3030/recipe`)
             .then(response => response.json())
             .then(
                 (response) => {
-                    setRecipes(response); 
+                    setRecipes(response);
                 },
                 (error) => {
                     console.error('Erreur lors de la récupération des données:', error);
@@ -32,18 +32,10 @@ export default function AllRecipes() {
                 <h1>Toutes mes recettes</h1>
                 {<SearchBar/>}
                 <div className="recipes">
-                    <HashLink to='/recipe'>
-                        <div className="recipe">
-                            <img className="recipe-photo" src="/images/recipe1.jpg" alt="recipePhoto" />
-                            <div className="recipe-infos">
-                                <h4>Aubergine Pizza</h4>
-                            </div>
-                        </div>
-                    </HashLink>
                     {
                         recipes.map(recipe => (
                             <RecipeCard 
-                            key = {recipe._id}
+                            key = {recipe.id}
                             props = {recipe}
                         />
                         ))

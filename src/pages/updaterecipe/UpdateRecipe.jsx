@@ -14,7 +14,7 @@ export default function UpdateRecipe() {
 
         // Récupérer les informations contenues dans la show
         const getRecipeDetails = async () => {
-            let results = await fetch(`http://localhost:5000/recipes/${recipeId}`)
+            let results = await fetch(`http://localhost:3030/recipe/${recipeId}`)
             results = await results.json()
             setRecipe(results)
         }
@@ -33,12 +33,12 @@ export default function UpdateRecipe() {
                 body: JSON.stringify(recipe)
             }
 
-            fetch(`http://localhost:5000/recipes/${recipeId}`, requestOptions )
+            fetch(`http://localhost:3030/recipe/${recipeId}`, requestOptions )
             .then(response => response.json())
             .then (data => {
                 // Pas besoin de créer de copie ni de pusher, on veut écraser l'ancien data
                 setRecipe(data)
-                navigate(`/recipes/${data._id}`)
+                navigate(`/recipes/${data.id}`)
             })
         }
 
