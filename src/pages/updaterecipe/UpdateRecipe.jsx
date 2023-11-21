@@ -28,7 +28,7 @@ export default function UpdateRecipe() {
         // Enregistrer les modifications effectuées
         const handleEdit = async (recipe) => {
             const requestOptions = {
-                method: "PUT",
+                method: "PATCH",
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(recipe)
             }
@@ -75,13 +75,13 @@ export default function UpdateRecipe() {
                     onChange={handleChange}
                 />
 
-                <label htmlFor="#input-url">Lien</label>
+                <label htmlFor="#input-link">Lien</label>
                 <input 
-                    id='input-url'
+                    id='input-link'
                     type="text"
                     placeholder="Si vous en avez, ajoutez votre lien ici"
-                    name="url"
-                    value={recipe.url || ''}
+                    name="link"
+                    value={recipe.link || ''}
                     onChange={handleChange} 
                 />
 
