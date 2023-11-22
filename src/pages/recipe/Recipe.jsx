@@ -68,14 +68,14 @@ export default function Recipe() {
                 <div className="link-container">
                     <FontAwesomeIcon className='icon' icon={faLink} />
                     {
-                        !recipe.url ? <p>Tout est dans la description !</p> : <p>{recipe.url}</p>
+                        !recipe.link ? <p>Tout est dans la description !</p> : <p>{recipe.link}</p>
                     }
                 </div>
                 <div className='recipe-infos'>
                     <h2>Recette</h2>
                     <div className="recipe-paragraph">
                         {
-                            recipe.url ? <p>Tout est dans le lien !</p> : <p>Recette de chef.fe</p>
+                            recipe.link ? <p>Tout est dans le lien !</p> : <p>Recette de chef.fe</p>
                         }
                         <div className="divider"></div>
                         {
