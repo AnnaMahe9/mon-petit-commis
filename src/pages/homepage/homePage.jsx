@@ -18,6 +18,10 @@ export default function Homepage() {
           <HashLink to="/new_recipe">
             <MainBtn text="Ajouter une recette"/>
           </HashLink>
+
+          <HashLink to="/poc">
+            <MainBtn text="poc"/>
+          </HashLink>
         </div>
       </div>
     </div>
