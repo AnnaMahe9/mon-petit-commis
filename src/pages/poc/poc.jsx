@@ -8,15 +8,18 @@ export default function Poc() {
    const [imageSelected, setImageSelected] = useState("");
 
  
-  const uploadImage = () => {
+  const uploadImage = (event) => {
+    event.preventDefault();
     const formData = new FormData();
+    const userId = '154241564';
     formData.append("file", imageSelected)
+    formData.append("folder", userId)
     formData.append("upload_preset", "vdwpz1pj")
+    
 
     axios.post('https://api.cloudinary.com/v1_1/dppjibpjb/image/upload', formData)
         .then((response) => {
           console.log(response)
-          setImageSelected("")
         }
     )
   }
@@ -26,9 +29,9 @@ export default function Poc() {
         <div>
             <input 
                 type="file"
-                onChange={(event) => {setImageSelected(event.target.files[0])}}
+                onChange={(event) => setImageSelected(event.target.files[0])}
                 />
-            <button onClick={uploadImage()}>Upload Image</button>
+            <button onClick={(event) => {uploadImage(event)}}>Upload Image</button>
         </div>
     )
 }
