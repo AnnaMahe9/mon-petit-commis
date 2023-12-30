@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
-import { HashLink } from 'react-router-hash-link';
 import './allrecipes.css';
 import RecipeCard from '../../components/recipecard/RecipeCard';
 

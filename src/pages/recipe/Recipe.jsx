@@ -20,7 +20,10 @@ export default function Recipe() {
         .then (response => response.json())
         .then (
             (data) => {
+                console.log(data)
                 setRecipe(data)
+                console.log(recipe)
+                
             },
             (error) => {
                 console.error("Erreur lors de la récupération des données", error)
@@ -63,7 +66,7 @@ export default function Recipe() {
                     <FontAwesomeIcon className='icon' icon={faTrash} onClick={handleDelete} />
                 </div>
 
-                <img className='big-recipe-photo' src="/images/recipe1.jpg" alt="recipe1" />
+                <img className='big-recipe-photo' src={`https://res.cloudinary.com/dppjibpjb/image/upload/f_auto,q_auto/v1/${recipe.photoPath}`} alt="recipe1" />
 
                 <div className="link-container">
                     <FontAwesomeIcon className='icon' icon={faLink} />

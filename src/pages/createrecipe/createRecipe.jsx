@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './createrecipe.css'
+import axios from 'axios'
+
 
 export default function CreateRecipe() {
     //State
     const [recipes, setRecipes] = useState([])
-    const [newRecipe, setNewRecipe] = useState({title:"", url:"", description:""});
+    const [imageSelected, setImageSelected] = useState("");
+    const [newRecipe, setNewRecipe] = useState({title:"", link:"", photoPath: "", description:""});
     const navigate = useNavigate()
 
   // Behavior
@@ -17,30 +20,64 @@ export default function CreateRecipe() {
     const handleSubmit = (event) => {
         event.preventDefault();
         handleAdd(newRecipe);
-        setNewRecipe({title:"", url:"", description:""});
+        setNewRecipe({title:"", link:"", photoPath: "", description:""});
     }
 
   // POST
-  const handleAdd = (newRecipe) => {
+  // const handleAdd = (newRecipe) => {
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRecipe)
-    }
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(newRecipe)
+  //   }
 
-    fetch('http://localhost:3030/recipe', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        const recipesCopy = [...recipes]
-        recipesCopy.push(data)
-        setRecipes(recipesCopy)
-        navigate(`/recipes/${data.id}`)
-      },
-      (error) => {
-        console.error("Une erreur s'est produite lors de l'enregistrement de la recette", error)
-      }
-      )
+  //   fetch('http://localhost:3030/recipe', requestOptions)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const recipesCopy = [...recipes]
+  //       recipesCopy.push(data)
+  //       setRecipes(recipesCopy)
+  //       navigate(`/recipes/${data.id}`)
+  //     },
+  //     (error) => {
+  //       console.error("Une erreur s'est produite lors de l'enregistrement de la recette", error)
+  //     }
+  //     )
+  // }
+
+  const handleAdd = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    const userId = '123456789';
+    formData.append("file", imageSelected)
+    formData.append("folder", userId)
+    formData.append("upload_preset", "vdwpz1pj")
+    
+
+    axios.post('https://api.cloudinary.com/v1_1/dppjibpjb/image/upload', formData)
+        .then((response) => {
+          console.log(response)
+          console.log(response.data.public_id)
+          newRecipe.photoPath = response.data.public_id;
+      
+          console.log("newRecipe", newRecipe);
+          axios.post('http://localhost:3030/recipe', newRecipe)
+            // .then(response => response.json())
+            .then(data => {
+              console.log(data)
+              const recipesCopy = [...recipes]
+              recipesCopy.push(data)
+              setRecipes(recipesCopy)
+              console.log(data.data.id)
+              navigate(`/recipes/${data.data.id}`)
+            },
+            (error) => {
+              console.error("Une erreur s'est produite lors de l'enregistrement de la recette", error)
+            }
+            )
+        }
+    )
   }
 
   // Render
@@ -57,13 +94,13 @@ export default function CreateRecipe() {
                     value={newRecipe.title} 
                     onChange={handleChange}
                 />
-                <label htmlFor="#input-url">Lien</label>
+                <label htmlFor="#input-link">Lien</label>
                 <input 
-                    id='input-url'
+                    id='input-link'
                     type="text"
                     placeholder="Si vous en avez, ajoutez votre lien ici"
-                    name="url"
-                    value={newRecipe.url}
+                    name="link"
+                    value={newRecipe.link}
                     onChange={handleChange} 
                 />
                 <label htmlFor="#input-description">Description</label>
@@ -75,7 +112,12 @@ export default function CreateRecipe() {
                     value={newRecipe.description}
                     onChange={handleChange} 
                 />
-                <button>Ajouter</button>
+                <label htmlFor="#input-photo">Photo</label>
+                <input 
+                  type="file"
+                  onChange={(event) => setImageSelected(event.target.files[0])}
+                />
+                <button onClick={(event) => {handleAdd(event)}}>Ajouter</button>
             </form>
         </div>
     )
