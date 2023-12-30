@@ -20,6 +20,7 @@ export default function Poc() {
     axios.post('https://api.cloudinary.com/v1_1/dppjibpjb/image/upload', formData)
         .then((response) => {
           console.log(response)
+          console.log(response.data.public_id)
         }
     )
   }
