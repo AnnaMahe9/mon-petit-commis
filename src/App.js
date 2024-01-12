@@ -19,7 +19,7 @@ function App() {
         <Route path="/recipes/:id" Component={Recipe}></Route>
         <Route path="/new_recipe" Component={CreateRecipe}></Route>
         <Route path="recipes/:id/update_recipe" Component={UpdateRecipe}></Route>
-        <Route path="/user" Component={AddUser}></Route>
+        <Route path="/sign-up" Component={AddUser}></Route>
       </Routes>
     </div>
   );
