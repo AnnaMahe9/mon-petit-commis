@@ -9,7 +9,7 @@ export default function CreateRecipe() {
     const [recipes, setRecipes] = useState([])
     const [imageSelected, setImageSelected] = useState("");
     const [newRecipe, setNewRecipe] = useState({title:"", link:"", photoPath: "", description:""});
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
   // Behavior
     const handleChange = (event) => {
