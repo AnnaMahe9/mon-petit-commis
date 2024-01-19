@@ -5,7 +5,8 @@ import './adduser.css';
 
 export default function AddUser() {
     // State
-    const [newUser, setNewUser] = useState({firstname:"", lastname:"", email: "", password:""});
+    const [newUser, setNewUser] = useState({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
+    const [imageSelected, setImageSelected] = useState("");
     const navigate = useNavigate();
 
     // Behavior
@@ -16,12 +17,26 @@ export default function AddUser() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // handleAdd(newUser);
         axios.post('http://localhost:3030/user', newUser)
             .then((response) => {
-                setNewUser({firstname:"", lastname:"", email: "", password:""});
-                console.log(response);
-                navigate(`/`)
+                const formData = new FormData();
+                const userId = response.data.id;
+                formData.append("file", imageSelected)
+                formData.append("folder", userId)
+                formData.append("upload_preset", "vdwpz1pj")
+                
+
+                axios.post('https://api.cloudinary.com/v1_1/dppjibpjb/image/upload', formData)
+                    .then((response) => {
+                    newUser.photoPath = response.data.public_id;
+                    console.log(newUser);
+                    axios.patch(`http://localhost:3030/user/${userId}`, newUser)
+                        .then((response) => {
+                            setNewUser({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
+                            navigate(`/`);
+                        })
+                    }
+                )
             })
     }
 
@@ -69,6 +84,14 @@ export default function AddUser() {
                         name="password"
                         onChange={handleChange}
                         />
+                </div>
+
+                <div>
+                    <label htmlFor="#input-photo">Photo</label>
+                    <input 
+                    type="file"
+                    onChange={(event) => setImageSelected(event.target.files[0])}
+                    />
                 </div>
                 <div className='user-validation'>
                     <button onClick={(event) => {handleSubmit(event)}}>Ajouter</button>
