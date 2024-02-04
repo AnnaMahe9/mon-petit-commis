@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import './allrecipes.css';
 import RecipeCard from '../../components/recipecard/RecipeCard';
 
 
-export default function AllRecipes() {
+export default function AllRecipes({ setShowNavbar }) {
     // State
     const [recipes, setRecipes] = useState([])
 
     // Behavior
-
+    useLayoutEffect(() => {
+        setShowNavbar(true);
+    }, [])
     // GET Method
     useEffect(() => {
         fetch(`http://localhost:3030/recipe`)
