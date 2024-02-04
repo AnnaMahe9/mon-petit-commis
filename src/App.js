@@ -7,7 +7,8 @@ import Recipe from './pages/recipe/Recipe';
 import CreateRecipe from './pages/createrecipe/createRecipe';
 import UpdateRecipe from './pages/updaterecipe/UpdateRecipe';
 import './App.css';
-import AddUser from './pages/adduser/adduser';
+import SignUp from './pages/signup/signup';
+import Login from './pages/login/login';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/recipes/:id" Component={Recipe}></Route>
         <Route path="/new_recipe" Component={CreateRecipe}></Route>
         <Route path="recipes/:id/update_recipe" Component={UpdateRecipe}></Route>
-        <Route path="/sign-up" Component={AddUser}></Route>
+        <Route path="/sign-up" Component={SignUp}></Route>
+        <Route path="/login" Component={Login}></Route>
       </Routes>
     </div>
   );

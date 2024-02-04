@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import './adduser.css';
+import './signup.css';
 
-export default function AddUser() {
+export default function SignUp() {
     // State
     const [newUser, setNewUser] = useState({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
     const [imageSelected, setImageSelected] = useState("");
@@ -33,7 +33,7 @@ export default function AddUser() {
                     axios.patch(`http://localhost:3030/user/${userId}`, newUser)
                         .then((response) => {
                             setNewUser({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
-                            navigate(`/`);
+                            navigate(`/login`);
                         })
                     }
                 )
