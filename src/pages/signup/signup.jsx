@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './signup.css';
 
-export default function SignUp() {
+export default function SignUp({ setShowNavbar }) {
     // State
     const [newUser, setNewUser] = useState({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
     const [imageSelected, setImageSelected] = useState("");
     const navigate = useNavigate();
 
     // Behavior
+    useLayoutEffect(() => {
+        setShowNavbar(false);
+    }, [])
+
     const handleChange = (event) => {
         setNewUser({...newUser, [event.target.name]: event.target.value})
     }

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './createrecipe.css'
 import axios from 'axios'
 
 
-export default function CreateRecipe() {
+export default function CreateRecipe({ setShowNavbar }) {
     //State
     const [recipes, setRecipes] = useState([])
     const [imageSelected, setImageSelected] = useState("");
@@ -12,6 +12,9 @@ export default function CreateRecipe() {
     const navigate = useNavigate();
 
   // Behavior
+    useLayoutEffect(() => {
+      setShowNavbar(true);
+  }, [])
     const handleChange = (event) => {
         setNewRecipe({...newRecipe, [event.target.name]: event.target.value})
     }

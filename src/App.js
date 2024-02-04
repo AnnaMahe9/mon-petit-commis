@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/navbar/Navbar';
 import Homepage from './pages/homepage/homePage';
@@ -11,17 +11,20 @@ import SignUp from './pages/signup/signup';
 import Login from './pages/login/login';
 
 function App() {
+  
+  const [showNavbar, setShowNavbar] = useState(true);
+
   return (
     <div className="App">
-      <Navbar />
+      { showNavbar && <Navbar /> }
       <Routes>
-        <Route path="/" Component={Homepage}></Route>
-        <Route path="/recipes" Component={AllRecipes}></Route>
-        <Route path="/recipes/:id" Component={Recipe}></Route>
-        <Route path="/new_recipe" Component={CreateRecipe}></Route>
-        <Route path="recipes/:id/update_recipe" Component={UpdateRecipe}></Route>
-        <Route path="/sign-up" Component={SignUp}></Route>
-        <Route path="/login" Component={Login}></Route>
+        <Route path="/" element={<Homepage setShowNavbar={setShowNavbar} />}></Route>
+        <Route path="/recipes" element={<AllRecipes setShowNavbar={setShowNavbar}/>}></Route>
+        <Route path="/recipes/:id" element={<Recipe setShowNavbar={setShowNavbar}/>}></Route>
+        <Route path="/new_recipe" element={<CreateRecipe setShowNavbar={setShowNavbar}/>}></Route>
+        <Route path="recipes/:id/update_recipe" element={<UpdateRecipe setShowNavbar={setShowNavbar}/>}></Route>
+        <Route path="/sign-up" element={<SignUp setShowNavbar={setShowNavbar}/>}></Route>
+        <Route path="/login" element={<Login setShowNavbar={setShowNavbar}/>}></Route>
       </Routes>
     </div>
   );

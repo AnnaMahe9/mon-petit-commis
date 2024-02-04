@@ -1,63 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import './updaterecipe.css';
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function UpdateRecipe() {
+export default function UpdateRecipe({ setShowNavbar }) {
     //State
-        const navigate = useNavigate()
+    const navigate = useNavigate()
 
-        // Récupérer l'id dans les params
-        const recipeId = useParams().id
+    // Récupérer l'id dans les params
+    const recipeId = useParams().id
 
-        // Utiliser un useState pour enregistrer les informations
-        const [recipe, setRecipe] = useState([])
+    // Utiliser un useState pour enregistrer les informations
+    const [recipe, setRecipe] = useState([])
 
-        // Récupérer les informations contenues dans la show
-        const getRecipeDetails = async () => {
-            let results = await fetch(`http://localhost:3030/recipe/${recipeId}`)
-            results = await results.json()
-            setRecipe(results)
-        }
+    // Récupérer les informations contenues dans la show
+    const getRecipeDetails = async () => {
+        let results = await fetch(`http://localhost:3030/recipe/${recipeId}`)
+        results = await results.json()
+        setRecipe(results)
+    }
 
 
     // Behavior
-        useEffect(()=> {
-            getRecipeDetails()
-        }, [])
+    useLayoutEffect(() => {
+        setShowNavbar(false);
+    }, [])
+    useEffect(()=> {
+        getRecipeDetails()
+    }, [])
 
-        // Enregistrer les modifications effectuées
-        const handleEdit = async (recipe) => {
-            const requestOptions = {
-                method: "PATCH",
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(recipe)
-            }
-
-            fetch(`http://localhost:3030/recipe/${recipeId}`, requestOptions )
-            .then(response => response.json())
-            .then (data => {
-                // Pas besoin de créer de copie ni de pusher, on veut écraser l'ancien data
-                setRecipe(data)
-                navigate(`/recipes/${data.id}`)
-            })
+    // Enregistrer les modifications effectuées
+    const handleEdit = async (recipe) => {
+        const requestOptions = {
+            method: "PATCH",
+            headers: { 'Content-Type' : 'application/json' },
+            body: JSON.stringify(recipe)
         }
 
-        // Modifier les informations déjà renseignées
-        const handleChange = (event) => {
-            // Afin de ne pas supprimer tout le state à la moindre modification:
-            const { name, value } = event.target;
-            setRecipe((prevRecipe) => ({
-              ...prevRecipe,
-              [name]: value,
-            }));
-          };
-          
-    
-        // Effectuer l'enregistrement des données une fois le bouton appuyé
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            handleEdit(recipe);
-        }
+        fetch(`http://localhost:3030/recipe/${recipeId}`, requestOptions )
+        .then(response => response.json())
+        .then (data => {
+            // Pas besoin de créer de copie ni de pusher, on veut écraser l'ancien data
+            setRecipe(data)
+            navigate(`/recipes/${data.id}`)
+        })
+    }
+
+    // Modifier les informations déjà renseignées
+    const handleChange = (event) => {
+        // Afin de ne pas supprimer tout le state à la moindre modification:
+        const { name, value } = event.target;
+        setRecipe((prevRecipe) => ({
+            ...prevRecipe,
+            [name]: value,
+        }));
+        };
+        
+
+    // Effectuer l'enregistrement des données une fois le bouton appuyé
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        handleEdit(recipe);
+    }
 
     // Render
 

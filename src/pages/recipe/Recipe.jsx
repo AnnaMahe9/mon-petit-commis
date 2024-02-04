@@ -1,11 +1,11 @@
 import { faLink, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './recipe.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-export default function Recipe() {
+export default function Recipe({ setShowNavbar }) {
     // State
     const recipeId = useParams().id;
     const [recipe, setRecipe] = useState([]);
@@ -13,7 +13,9 @@ export default function Recipe() {
     const navigate = useNavigate();
 
     // Behavior
-
+    useLayoutEffect(() => {
+        setShowNavbar(true);
+    }, [])
     // GET method
     useEffect(()=> {
         fetch(`http://localhost:3030/recipe/${recipeId}`)

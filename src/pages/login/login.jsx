@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './login.css';
 
-export default function Login() {
+export default function Login({ setShowNavbar }) {
     // State
     const [user, setUser] = useState({email: "", password:""});
     const navigate = useNavigate();
 
     // Behavior
+    useLayoutEffect(() => {
+        setShowNavbar(false);
+    }, [])
+
     const handleChange = (event) => {
         setUser({...user, [event.target.name]: event.target.value})
     }

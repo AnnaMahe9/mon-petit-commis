@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import './homepage.css';
 import MainBtn from '../../components/mainbtn/MainBtn';
 import { HashLink } from 'react-router-hash-link';
 
-export default function Homepage() {
+export default function Homepage({ setShowNavbar }) {
+
+    useLayoutEffect(() => {
+      setShowNavbar(true);
+  }, [])
 
   return(
     <div className="general-container">
