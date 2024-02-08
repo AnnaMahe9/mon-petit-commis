@@ -26,7 +26,9 @@ export default function Navbar() {
     }
   
   useEffect(()=> {
-    getUserInfos();
+    if(localStorage.getItem('accessToken')) {
+      getUserInfos();
+    }
 }, [])
   
   //render

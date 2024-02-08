@@ -2,12 +2,28 @@ import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './signup.css';
+import { Button, Divider, TextField } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import SendIcon from '@mui/icons-material/Send';
+import { styled } from '@mui/material/styles';
 
 export default function SignUp({ setShowNavbar }) {
     // State
     const [newUser, setNewUser] = useState({firstname:"", lastname:"", email: "", password:"", photoPath: ""});
     const [imageSelected, setImageSelected] = useState("");
     const navigate = useNavigate();
+    
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
 
     // Behavior
     useLayoutEffect(() => {
@@ -49,56 +65,52 @@ export default function SignUp({ setShowNavbar }) {
     return (
         <div className="general-container">
             <form className='add-user'>
-                <div className='user-names'>
-                    <label htmlFor="#input-firstname">Prénom*</label>
-                    <input 
-                        id='input-firstname'
-                        type="text"
-                        placeholder="Prénom"
-                        name="firstname"
-                        value={newUser.firstname} 
-                        onChange={handleChange}
-                        />
-                    <label htmlFor="#input-lastname">Nom*</label>
-                    <input 
-                        id='input-lastname'
-                        type="text"
-                        placeholder="Nom"
-                        name="lastname"
-                        value={newUser.lastname} 
-                        onChange={handleChange}
-                        />
-                </div>
-
-                <div className='user-infos'>
-                    <label htmlFor="#input-email">Email*</label>
-                    <input 
-                        id='input-email'
-                        type="mail"
-                        placeholder="Email"
-                        name="email"
-                        value={newUser.email} 
-                        onChange={handleChange}
-                        />
-                    <label htmlFor="#input-password">Mot de passe*</label>
-                    <input 
-                        id='input-password'
-                        type="password"
-                        placeholder="Mot de passe"
-                        name="password"
-                        onChange={handleChange}
-                        />
-                </div>
+                <TextField
+                    required
+                    id="outlined-required"
+                    name="firstname"
+                    label="prénom"
+                    defaultValue="Prénom"
+                    value={newUser.firstname} 
+                    onChange={handleChange}
+                />
+                <TextField
+                    required
+                    id="outlined-required"
+                    name="lastname"
+                    label="Nom"
+                    defaultValue="Nom"
+                    value={newUser.lastname} 
+                    onChange={handleChange}
+                />
+                <TextField
+                    required
+                    id="outlined-required"
+                    name="email"
+                    label="Email"
+                    defaultValue="Email"
+                    value={newUser.email} 
+                    onChange={handleChange}
+                />
+                <TextField
+                    id="outlined-password-input"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    onChange={handleChange}
+                />
+                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
+                    Photo
+                    <VisuallyHiddenInput type="file" />
+                </Button>
 
                 <div>
-                    <label htmlFor="#input-photo">Photo</label>
-                    <input 
-                    type="file"
-                    onChange={(event) => setImageSelected(event.target.files[0])}
-                    />
-                </div>
-                <div className='user-validation'>
-                    <button onClick={(event) => {handleSubmit(event)}}>Ajouter</button>
+                    <hr />
+                    <Button component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
+                        S'inscrire
+                        <VisuallyHiddenInput type="file" />
+                    </Button>
                 </div>
             </form>
         </div>
