@@ -69,7 +69,7 @@ export default function Login({ setShowNavbar }) {
 
                 <div>
                     <hr />
-                    <Button component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
+                    <Button component="label" variant="contained" color='primary' onClick={(event) => {handleSubmit(event)}}>
                         Se connecter
                     </Button>
                 </div>

@@ -99,7 +99,7 @@ export default function SignUp({ setShowNavbar }) {
                     autoComplete="current-password"
                     onChange={handleChange}
                 />
-                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
+                <Button component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
                     Photo
                     <VisuallyHiddenInput type="file" />
                 </Button>
