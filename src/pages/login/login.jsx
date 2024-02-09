@@ -2,12 +2,25 @@ import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './login.css';
+import { Button, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export default function Login({ setShowNavbar }) {
     // State
     const [user, setUser] = useState({email: "", password:""});
     const navigate = useNavigate();
 
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
     // Behavior
     useLayoutEffect(() => {
         setShowNavbar(false);
@@ -32,30 +45,33 @@ export default function Login({ setShowNavbar }) {
     
     // Render
     return (
-        <div className="">
-            <form className='add-user'>
-                <div className='user-infos'>
-                    <label htmlFor="#input-email">Email*</label>
-                    <input 
-                        id='input-email'
-                        type="mail"
-                        placeholder="Email"
-                        name="email"
-                        value={user.email} 
-                        onChange={handleChange}
-                        />
-                    <label htmlFor="#input-password">Mot de passe*</label>
-                    <input 
-                        id='input-password'
-                        type="password"
-                        placeholder="Mot de passe"
-                        name="password"
-                        onChange={handleChange}
-                        />
-                </div>
+        <div className="general-container">
+            <form className='log-user'>
+                <TextField
+                    required
+                    id="outlined-required"
+                    name="email"
+                    label="Email"
+                    defaultValue="Email"
+                    value={user.email} 
+                    onChange={handleChange}
+                />
+                <TextField
+                    required
+                    id="outlined-password-input"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    onChange={handleChange}
+                />
+                    
 
-                <div className='user-validation'>
-                    <button onClick={(event) => {handleSubmit(event)}}>Ajouter</button>
+                <div>
+                    <hr />
+                    <Button component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
+                        Se connecter
+                    </Button>
                 </div>
             </form>
         </div>

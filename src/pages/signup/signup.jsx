@@ -2,9 +2,8 @@ import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './signup.css';
-import { Button, Divider, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import SendIcon from '@mui/icons-material/Send';
 import { styled } from '@mui/material/styles';
 
 export default function SignUp({ setShowNavbar }) {
@@ -109,7 +108,6 @@ export default function SignUp({ setShowNavbar }) {
                     <hr />
                     <Button component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
                         S'inscrire
-                        <VisuallyHiddenInput type="file" />
                     </Button>
                 </div>
             </form>
