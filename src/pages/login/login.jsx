@@ -40,6 +40,7 @@ export default function Login({ setShowNavbar }) {
                     id="outlined-required"
                     name="email"
                     label="Email"
+                    margin='normal'
                     defaultValue="Email"
                     value={user.email} 
                     onChange={handleChange}
@@ -50,14 +51,15 @@ export default function Login({ setShowNavbar }) {
                     name="password"
                     label="Password"
                     type="password"
+                    margin='normal'
                     autoComplete="current-password"
                     onChange={handleChange}
                 />
                     
 
-                <div>
+                <div id='login-div'>
                     <hr />
-                    <Button component="label" variant="contained" color='primary' onClick={(event) => {handleSubmit(event)}}>
+                    <Button id='login-button' component="label" variant="contained" color='primary' onClick={(event) => {handleSubmit(event)}}>
                         Se connecter
                     </Button>
                 </div>

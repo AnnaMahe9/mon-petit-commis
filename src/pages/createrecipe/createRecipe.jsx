@@ -85,6 +85,7 @@ export default function CreateRecipe({ setShowNavbar }) {
                     name="title"
                     label="title"
                     defaultValue="Entrez votre titre ici"
+                    margin="normal"
                     value={newRecipe.title} 
                     onChange={handleChange}
                 />
@@ -94,6 +95,7 @@ export default function CreateRecipe({ setShowNavbar }) {
                     name="link"
                     label="link"
                     defaultValue="Si vous en avez, ajoutez votre lien ici"
+                    margin="normal"
                     value={newRecipe.link} 
                     onChange={handleChange}
                 />
@@ -103,16 +105,17 @@ export default function CreateRecipe({ setShowNavbar }) {
                     name="description"
                     label="Description"
                     defaultValue="Si vous n'avez pas de lien, ajoutez votre recette ici"
+                    margin="normal"
                     value={newRecipe.description} 
                     onChange={handleChange}
                 />
-                <Button component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
+                <Button id="add-photo-recipe-button" component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
                     Photo
                     <VisuallyHiddenInput type="file" />
                 </Button>
-                <div>
+                <div id='recipe-div'>
                     <hr />
-                    <Button component="label" variant="contained" onClick={(event) => {handleAdd(event)}}>
+                    <Button id="add-recipe-button" component="label" variant="contained" onClick={(event) => {handleAdd(event)}}>
                       Ajouter
                     </Button>
                 </div>

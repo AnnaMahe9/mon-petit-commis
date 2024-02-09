@@ -26,3 +26,15 @@
 hr {
     width: 100%;
 }
+
+#add-photo-user-button {
+    margin-top: 1rem;
+}
+
+#register-div {
+    margin: 2rem;
+}
+
+#register-button {
+    margin:  1rem;
+}

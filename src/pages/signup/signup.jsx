@@ -69,6 +69,7 @@ export default function SignUp({ setShowNavbar }) {
                     id="outlined-required"
                     name="firstname"
                     label="prénom"
+                    margin='normal'
                     defaultValue="Prénom"
                     value={newUser.firstname} 
                     onChange={handleChange}
@@ -78,6 +79,7 @@ export default function SignUp({ setShowNavbar }) {
                     id="outlined-required"
                     name="lastname"
                     label="Nom"
+                    margin='normal'
                     defaultValue="Nom"
                     value={newUser.lastname} 
                     onChange={handleChange}
@@ -87,6 +89,7 @@ export default function SignUp({ setShowNavbar }) {
                     id="outlined-required"
                     name="email"
                     label="Email"
+                    margin='normal'
                     defaultValue="Email"
                     value={newUser.email} 
                     onChange={handleChange}
@@ -96,17 +99,18 @@ export default function SignUp({ setShowNavbar }) {
                     name="password"
                     label="Password"
                     type="password"
+                    margin='normal'
                     autoComplete="current-password"
                     onChange={handleChange}
                 />
-                <Button component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
+                <Button id='add-photo-user-button' component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
                     Photo
                     <VisuallyHiddenInput type="file" />
                 </Button>
 
-                <div>
+                <div id='register-div'>
                     <hr />
-                    <Button component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
+                    <Button id='register-button' component="label" variant="contained" onClick={(event) => {handleSubmit(event)}}>
                         S'inscrire
                     </Button>
                 </div>

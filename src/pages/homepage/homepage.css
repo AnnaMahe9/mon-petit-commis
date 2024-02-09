@@ -1,17 +1,25 @@
 .general-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-items: center;
-  text-align: center;
   background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("background.jpg");
   min-height: 100vh;
   background-size: 20%;
   background-repeat:repeat;
-  padding-bottom: 50px;
+  /* display: grid;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  padding-bottom: 50px; */
 }
 
 .homepage-container {
   width: fit-content;
+}
+
+.homepage-container h1 {
+  text-align: center;
 }
 
 .homepage-link {

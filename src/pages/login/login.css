@@ -12,3 +12,11 @@
 hr {
     width: 100%;
 }
+
+#login-div {
+    margin: 2rem;
+}
+
+#login-button {
+    margin:  1rem;
+}
