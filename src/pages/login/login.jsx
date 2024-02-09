@@ -3,24 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './login.css';
 import { Button, TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
 
 export default function Login({ setShowNavbar }) {
     // State
     const [user, setUser] = useState({email: "", password:""});
     const navigate = useNavigate();
 
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-    });
     // Behavior
     useLayoutEffect(() => {
         setShowNavbar(false);

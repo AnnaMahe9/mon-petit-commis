@@ -13,6 +13,10 @@
 .homepage-container {
   width: fit-content;
 }
+
+.homepage-link {
+  padding: 1rem;
+}
   
 .btn-container {
   display: flex;

@@ -2,6 +2,9 @@ import React, { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './createrecipe.css'
 import axios from 'axios'
+import { Button, TextField } from "@mui/material";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
 
 
 export default function CreateRecipe({ setShowNavbar }) {
@@ -10,6 +13,18 @@ export default function CreateRecipe({ setShowNavbar }) {
     const [imageSelected, setImageSelected] = useState("");
     const [newRecipe, setNewRecipe] = useState({title:"", link:"", photoPath: "", description:""});
     const navigate = useNavigate();
+
+    const VisuallyHiddenInput = styled('input')({
+      clip: 'rect(0 0 0 0)',
+      clipPath: 'inset(50%)',
+      height: 1,
+      overflow: 'hidden',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      whiteSpace: 'nowrap',
+      width: 1,
+  });
 
   // Behavior
     useLayoutEffect(() => {
@@ -25,29 +40,6 @@ export default function CreateRecipe({ setShowNavbar }) {
         handleAdd(newRecipe);
         setNewRecipe({title:"", link:"", photoPath: "", description:""});
     }
-
-  // POST
-  // const handleAdd = (newRecipe) => {
-
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(newRecipe)
-  //   }
-
-  //   fetch('http://localhost:3030/recipe', requestOptions)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const recipesCopy = [...recipes]
-  //       recipesCopy.push(data)
-  //       setRecipes(recipesCopy)
-  //       navigate(`/recipes/${data.id}`)
-  //     },
-  //     (error) => {
-  //       console.error("Une erreur s'est produite lors de l'enregistrement de la recette", error)
-  //     }
-  //     )
-  // }
 
   const handleAdd = (event) => {
     event.preventDefault();
@@ -66,7 +58,6 @@ export default function CreateRecipe({ setShowNavbar }) {
       
           console.log("newRecipe", newRecipe);
           axios.post('http://localhost:3030/recipe', newRecipe)
-            // .then(response => response.json())
             .then(data => {
               console.log(data)
               const recipesCopy = [...recipes]
@@ -88,39 +79,43 @@ export default function CreateRecipe({ setShowNavbar }) {
         <div className="general-container">
             <h1>Ici on ajoute une recette</h1>
             <form className='add-form' action="submit" onSubmit={handleSubmit}>
-                <label htmlFor="#input-title">Titre*</label>
-                <input 
-                    id='input-title'
-                    type="text"
-                    placeholder="Entrez votre titre ici"
+                <TextField
+                    required
+                    id="outlined-required"
                     name="title"
+                    label="title"
+                    defaultValue="Entrez votre titre ici"
                     value={newRecipe.title} 
                     onChange={handleChange}
                 />
-                <label htmlFor="#input-link">Lien</label>
-                <input 
-                    id='input-link'
-                    type="text"
-                    placeholder="Si vous en avez, ajoutez votre lien ici"
+                <TextField
+                    required
+                    id="outlined-required"
                     name="link"
-                    value={newRecipe.link}
-                    onChange={handleChange} 
+                    label="link"
+                    defaultValue="Si vous en avez, ajoutez votre lien ici"
+                    value={newRecipe.link} 
+                    onChange={handleChange}
                 />
-                <label htmlFor="#input-description">Description</label>
-                <input 
-                    id='input-description'
-                    type="text"
-                    placeholder="Si vous n'avez pas de lien, ajoutez votre recette ici"
+                <TextField
+                    required
+                    id="outlined-required"
                     name="description"
-                    value={newRecipe.description}
-                    onChange={handleChange} 
+                    label="Description"
+                    defaultValue="Si vous n'avez pas de lien, ajoutez votre recette ici"
+                    value={newRecipe.description} 
+                    onChange={handleChange}
                 />
-                <label htmlFor="#input-photo">Photo</label>
-                <input 
-                  type="file"
-                  onChange={(event) => setImageSelected(event.target.files[0])}
-                />
-                <button onClick={(event) => {handleAdd(event)}}>Ajouter</button>
+                <Button component="label" variant="contained" color='secondary' startIcon={<CloudUploadIcon />} onChange={(event) => setImageSelected(event.target.files[0])}>
+                    Photo
+                    <VisuallyHiddenInput type="file" />
+                </Button>
+                <div>
+                    <hr />
+                    <Button component="label" variant="contained" onClick={(event) => {handleAdd(event)}}>
+                      Ajouter
+                    </Button>
+                </div>
             </form>
         </div>
     )

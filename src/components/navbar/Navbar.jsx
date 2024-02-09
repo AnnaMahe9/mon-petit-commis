@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import './navbar.css'
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 

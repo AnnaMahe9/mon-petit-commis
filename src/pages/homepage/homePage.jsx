@@ -16,10 +16,10 @@ export default function Homepage({ setShowNavbar }) {
         <h1>Bienvenue sur Mon Petit Commis</h1>
         <SearchBar />
         <div className="btn-container">
-          <HashLink to="/recipes">
+          <HashLink to="/recipes" className='homepage-link'>
             <MainBtn text="Consulter les recettes"/>
           </HashLink>
-          <HashLink to="/new_recipe">
+          <HashLink to="/new_recipe" className='homepage-link'>
             <MainBtn text="Ajouter une recette"/>
           </HashLink>
         </div>
