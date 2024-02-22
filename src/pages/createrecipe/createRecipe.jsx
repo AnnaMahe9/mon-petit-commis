@@ -5,14 +5,17 @@ import axios from 'axios'
 import { Button, TextField } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
+import { jwtDecode } from "jwt-decode";
 
 
 export default function CreateRecipe({ setShowNavbar }) {
     //State
+    const userId = JSON.parse(jwtDecode(localStorage.getItem('accessToken')).id);
     const [recipes, setRecipes] = useState([])
     const [imageSelected, setImageSelected] = useState("");
-    const [newRecipe, setNewRecipe] = useState({title:"", link:"", photoPath: "", description:""});
+    const [newRecipe, setNewRecipe] = useState({user: userId, title:"", link:"", photoPath: "", description:""});
     const navigate = useNavigate();
+
 
     const VisuallyHiddenInput = styled('input')({
       clip: 'rect(0 0 0 0)',
@@ -30,21 +33,21 @@ export default function CreateRecipe({ setShowNavbar }) {
     useLayoutEffect(() => {
       setShowNavbar(true);
   }, [])
-    const handleChange = (event) => {
-        setNewRecipe({...newRecipe, [event.target.name]: event.target.value})
-    }
+
+  const handleChange = (event) => {
+      setNewRecipe({...newRecipe, [event.target.name]: event.target.value})
+  }
 
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        handleAdd(newRecipe);
-        setNewRecipe({title:"", link:"", photoPath: "", description:""});
-    }
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      handleAdd(newRecipe);
+      setNewRecipe({title:"", link:"", photoPath: "", description:""});
+  }
 
   const handleAdd = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    const userId = '123456789';
     formData.append("file", imageSelected)
     formData.append("folder", userId)
     formData.append("upload_preset", "vdwpz1pj")

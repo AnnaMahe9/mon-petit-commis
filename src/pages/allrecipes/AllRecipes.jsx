@@ -2,11 +2,13 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar/SearchBar';
 import './allrecipes.css';
 import RecipeCard from '../../components/recipecard/RecipeCard';
+import { jwtDecode } from 'jwt-decode';
 
 
 export default function AllRecipes({ setShowNavbar }) {
     // State
     const [recipes, setRecipes] = useState([])
+    const userId = JSON.parse(jwtDecode(localStorage.getItem('accessToken')).id);
 
     // Behavior
     useLayoutEffect(() => {
@@ -14,7 +16,7 @@ export default function AllRecipes({ setShowNavbar }) {
     }, [])
     // GET Method
     useEffect(() => {
-        fetch(`http://localhost:3030/recipe`)
+        fetch(`http://localhost:3030/recipe/user/${userId}`)
             .then(response => response.json())
             .then(
                 (response) => {
