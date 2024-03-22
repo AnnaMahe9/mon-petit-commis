@@ -60,7 +60,7 @@ export default function Recipe({ setShowNavbar }) {
                         <FontAwesomeIcon className='icon' icon={faPen} />
                     </HashLink>
                     <div className="title-infos">
-                        <h1>{recipe.title}</h1>
+                        <h1 id='recetteTitle'>{recipe.title}</h1>
                         {
                             !recipe.category ? <h3>- Non catégorisé -</h3> : <h3>- {recipe.category} -</h3> 
                         }
