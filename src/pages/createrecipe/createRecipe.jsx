@@ -13,7 +13,7 @@ export default function CreateRecipe({ setShowNavbar }) {
     const userId = JSON.parse(jwtDecode(localStorage.getItem('accessToken')).id);
     const [recipes, setRecipes] = useState([])
     const [imageSelected, setImageSelected] = useState("");
-    const [newRecipe, setNewRecipe] = useState({user: userId, title:"", link:"", photoPath: "", description:""});
+    const [newRecipe, setNewRecipe] = useState({userId: userId, title:"", link:"", photoPath: "", description:""});
     const navigate = useNavigate();
 
 
