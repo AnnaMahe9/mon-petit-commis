@@ -3,17 +3,22 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import './allrecipes.css';
 import RecipeCard from '../../components/recipecard/RecipeCard';
 import { jwtDecode } from 'jwt-decode';
+import { getUserId, useAuth } from '../../utils/authentification';
 
 
 export default function AllRecipes({ setShowNavbar }) {
     // State
     const [recipes, setRecipes] = useState([])
-    const userId = JSON.parse(jwtDecode(localStorage.getItem('accessToken')).id);
-
+    
     // Behavior
+    const { getToken } = useAuth();
+    
     useLayoutEffect(() => {
         setShowNavbar(true);
+        getToken();
     }, [])
+    const userId = getUserId();
+    console.log("tata");
     // GET Method
     useEffect(() => {
         fetch(`http://localhost:3030/recipe/user/${userId}`)

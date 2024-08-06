@@ -6,6 +6,7 @@ import { Button, TextField } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../../utils/authentification";
 
 
 export default function CreateRecipe({ setShowNavbar }) {
@@ -30,8 +31,11 @@ export default function CreateRecipe({ setShowNavbar }) {
   });
 
   // Behavior
-    useLayoutEffect(() => {
-      setShowNavbar(true);
+  const { getToken } = useAuth();
+
+  useLayoutEffect(() => {
+    setShowNavbar(true);
+    getToken();
   }, [])
 
   const handleChange = (event) => {

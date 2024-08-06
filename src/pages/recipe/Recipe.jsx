@@ -4,6 +4,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './recipe.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { useAuth } from '../../utils/authentification';
 
 export default function Recipe({ setShowNavbar }) {
     // State
@@ -15,6 +16,12 @@ export default function Recipe({ setShowNavbar }) {
     // Behavior
     useLayoutEffect(() => {
         setShowNavbar(true);
+        const { getToken } = useAuth();
+
+        useLayoutEffect(() => {
+          setShowNavbar(true);
+          getToken();
+        }, [])
     }, [])
     // GET method
     useEffect(()=> {
