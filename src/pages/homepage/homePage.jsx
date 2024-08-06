@@ -3,15 +3,11 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import './homepage.css';
 import MainBtn from '../../components/mainbtn/MainBtn';
 import { HashLink } from 'react-router-hash-link';
-import { useAuth } from '../../utils/authentification';
-
 
 export default function Homepage({ setShowNavbar }) {
-  const { getToken } = useAuth();
 
-  useLayoutEffect(() => {
-    setShowNavbar(true);
-    getToken();
+    useLayoutEffect(() => {
+      setShowNavbar(true);
   }, [])
 
   return(

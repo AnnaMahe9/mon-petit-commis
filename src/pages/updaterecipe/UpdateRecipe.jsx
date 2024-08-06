@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import './updaterecipe.css';
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../utils/authentification";
 
 export default function UpdateRecipe({ setShowNavbar }) {
     //State
@@ -22,13 +21,9 @@ export default function UpdateRecipe({ setShowNavbar }) {
 
 
     // Behavior
-    const { getToken } = useAuth();
-
     useLayoutEffect(() => {
-      setShowNavbar(true);
-      getToken();
+        setShowNavbar(false);
     }, [])
-
     useEffect(()=> {
         getRecipeDetails()
     }, [])
